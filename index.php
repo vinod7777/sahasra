@@ -11,6 +11,12 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="<?php echo $root; ?>assets/css/style.css">
+    <!-- Preload Critical Hero Images (Instant Discovery) -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=80" fetchpriority="high">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" fetchpriority="high">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80" fetchpriority="high">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=600&q=80" fetchpriority="high">
+
     <!-- Alpine.js for minimal interactivity -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -237,31 +243,78 @@
         }
         .projects-wrapper .project-card {
             scroll-snap-align: start;
+            height: 520px; /* Fixed height for all cards */
+            display: flex;
         }
-        .projects-nav {
+        .projects-wrapper .project-card .tilt-inner {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .projects-wrapper .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .projects-wrapper .project-card .aspect-\[4\/3\] {
+            flex-shrink: 0;
+            height: 280px; /* Consistent image block height */
+        }
+        .projects-wrapper .project-card .p-8 {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .projects-nav, .reviews-nav {
             display: flex;
             justify-content: center;
             gap: 12px;
             margin-top: 24px;
         }
-        .projects-nav button {
+        .projects-nav button, .reviews-nav button {
             width: 14px;
             height: 14px;
             border-radius: 9999px;
-            border: 1px solid rgba(37, 99, 235, 0.35);
+            border: 1px solid rgba(var(--brand-accent-rgb), 0.35);
             background: rgba(255, 255, 255, 0.9);
             cursor: pointer;
             transition: all 0.25s ease;
         }
-        .projects-nav button.active,
-        .projects-nav button:hover {
-            width: 18px;
-            height: 18px;
-            background: #2563EB;
+        .projects-nav button.active, .reviews-nav button.active,
+        .projects-nav button:hover, .reviews-nav button:hover {
+            width: 32px;
+            background: var(--brand-accent, #2563EB);
             border-color: transparent;
+        }
+        .reviews-wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+        }
+        .reviews-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        .reviews-wrapper .review-card {
+            flex-shrink: 0;
+            width: 450px;
+            max-width: 85vw;
+        }
+        .reviews-wrapper.dragging {
+            cursor: grabbing;
+        }
+        .projects-wrapper {
+            cursor: grab;
         }
         .projects-wrapper.dragging {
             cursor: grabbing;
+            scroll-snap-type: none; /* Disable snap during drag for smooth feel */
         }
         .tilt-inner {
             transform-style: preserve-3d;
@@ -475,8 +528,41 @@
     
         <!-- Centered Orbit Hub -->
         <div class="container mx-auto relative z-30 text-center max-w-4xl px-4 md:-translate-y-20 pt-20 md:pt-0">
-            <template x-for="(slide, index) in slides" :key="index">
-                <div x-show="activeSlide === index" 
+            <!-- 1. INITIAL STATIC SLIDE (Instant Render) -->
+            <div x-show="activeSlide === 0" 
+                 x-transition:enter="transition ease-out duration-1000"
+                 x-transition:enter-start="opacity-0 translate-y-12 blur-sm"
+                 x-transition:enter-end="opacity-100 translate-y-0 blur-0"
+                 x-transition:leave="transition ease-in duration-500 absolute inset-0"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95 blur-md"
+                 class="w-full">
+                
+                <!-- Main Heading -->
+                <h1 class="text-4xl sm:text-6xl md:text-8xl font-heading font-black text-brand-accent dark-theme:text-brand-accent mb-6 md:mb-8 leading-[1.05] tracking-tight">
+                    One Agency for<br/>
+                    <span class="text-highlight-green">Innovation</span>
+                </h1>
+                
+                <!-- Description -->
+                <p class="text-sm md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed font-medium">Bring ideas together effortlessly. Sahasra connects projects flowing with clarity and creative momentum every single day.</p>
+                
+                <!-- Buttons -->
+                <div class="flex flex-col items-center gap-10">
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="#contact" class="btn-7 px-10 py-5 rounded-full text-white font-bold hover:scale-105 transition-all text-sm tracking-wide">
+                            Try Sahasra
+                        </a>
+                        <a href="#services" class="btn-7-reverse px-10 py-5 rounded-full border-2 border-brand-dark text-brand-dark font-bold hover:bg-brand-dark hover:text-white transition-all text-sm tracking-wide">
+                            Learn more
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. SUBSEQUENT DYNAMIC SLIDES -->
+            <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+                <div x-show="activeSlide === index + 1" 
                      x-transition:enter="transition ease-out duration-1000"
                      x-transition:enter-start="opacity-0 translate-y-12 blur-sm"
                      x-transition:enter-end="opacity-100 translate-y-0 blur-0"
@@ -494,7 +580,7 @@
                     <!-- Description -->
                     <p class="text-sm md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed font-medium" x-text="slide.desc"></p>
                     
-                    <!-- Buttons & Social Proof -->
+                    <!-- Buttons -->
                     <div class="flex flex-col items-center gap-10">
                         <div class="flex flex-wrap justify-center gap-6">
                             <a href="#contact" class="btn-7 px-10 py-5 rounded-full text-white font-bold hover:scale-105 transition-all text-sm tracking-wide">
@@ -536,8 +622,22 @@
             
             <!-- Node 1: Top Left -->
             <div class="hero-floating-card top-[5%] left-[0%] sm:top-[12%] sm:left-[4%] w-[120px] sm:w-[200px] md:w-[320px] floating-node-1 orbit-float aspect-[4/3] opacity-40 sm:opacity-100">
-                <template x-for="(slide, index) in slides" :key="index">
-                    <img x-show="activeSlide === index"
+                <!-- Static Initial Image -->
+                <img x-show="activeSlide === 0"
+                     src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=80" 
+                     x-transition:enter="transition ease-out duration-700"
+                     x-transition:enter-start="opacity-0 scale-90"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-500 absolute inset-0"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-90"
+                     class="transform -rotate-6 rounded-2xl shadow-xl w-full h-full object-cover" 
+                     fetchpriority="high"
+                     loading="eager" />
+
+                <!-- Dynamic Remaining Slides -->
+                <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+                    <img x-show="activeSlide === index + 1"
                          :src="slide.img1" 
                          x-transition:enter="transition ease-out duration-700"
                          x-transition:enter-start="opacity-0 scale-90"
@@ -545,14 +645,30 @@
                          x-transition:leave="transition ease-in duration-500 absolute inset-0"
                          x-transition:leave-start="opacity-100 scale-100"
                          x-transition:leave-end="opacity-0 scale-90"
-                         class="transform -rotate-6 rounded-2xl shadow-xl w-full h-full object-cover" />
+                         class="transform -rotate-6 rounded-2xl shadow-xl w-full h-full object-cover" 
+                         fetchpriority="high"
+                         loading="eager" />
                 </template>
             </div>
 
             <!-- Node 2: Bottom Left -->
             <div class="hero-floating-card bottom-[15%] left-[6%] w-[140px] md:w-[240px] floating-node-2 orbit-float aspect-square hidden sm:block" style="animation-delay: -1s;">
-                <template x-for="(slide, index) in slides" :key="index">
-                    <img x-show="activeSlide === index"
+                <!-- Static Initial Image -->
+                <img x-show="activeSlide === 0"
+                     src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" 
+                     x-transition:enter="transition ease-out duration-700 delay-100"
+                     x-transition:enter-start="opacity-0 scale-90"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-500 absolute inset-0"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-90"
+                     class="transform rotate-3 rounded-2xl shadow-xl w-full h-full object-cover" 
+                     fetchpriority="high"
+                     loading="eager" />
+
+                <!-- Dynamic Remaining Slides -->
+                <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+                    <img x-show="activeSlide === index + 1"
                          :src="slide.img2" 
                          x-transition:enter="transition ease-out duration-700 delay-100"
                          x-transition:enter-start="opacity-0 scale-90"
@@ -560,14 +676,36 @@
                          x-transition:leave="transition ease-in duration-500 absolute inset-0"
                          x-transition:leave-start="opacity-100 scale-100"
                          x-transition:leave-end="opacity-0 scale-90"
-                         class="transform rotate-3 rounded-2xl shadow-xl w-full h-full object-cover" />
+                         class="transform rotate-3 rounded-2xl shadow-xl w-full h-full object-cover" 
+                         fetchpriority="high"
+                         loading="eager" />
                 </template>
             </div>
 
             <!-- Node 3: Middle Left Orbit -->
             <div class="hero-floating-card top-[45%] left-[2%] w-[180px] bg-white dark-theme:bg-slate-900 rounded-3xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 dark-theme:border-slate-800 floating-node-3 pointer-events-auto orbit-float h-[100px] hidden lg:block" style="animation-delay: -2s;">
-                 <template x-for="(slide, index) in slides" :key="index">
-                    <div x-show="activeSlide === index"
+                 <!-- Static Initial Content -->
+                 <div x-show="activeSlide === 0"
+                      x-transition:enter="transition ease-out duration-700"
+                      x-transition:enter-start="opacity-0 translate-y-4"
+                      x-transition:enter-end="opacity-100 translate-y-0"
+                      x-transition:leave="transition ease-in duration-300 absolute inset-0 p-5"
+                      x-transition:leave-start="opacity-100 translate-y-0"
+                      x-transition:leave-end="opacity-0 -translate-y-4"
+                      class="w-full h-full flex flex-col justify-center">
+                     <h4 class="text-[12px] font-bold text-brand-dark dark-theme:text-white mb-4 uppercase tracking-tighter">Task Status</h4>
+                     <div class="h-1.5 w-full bg-gray-100 dark-theme:bg-slate-800 rounded-full mb-3">
+                         <div class="h-full bg-brand-accent rounded-full w-[70%]" :style="`box-shadow: 0 0 10px rgba(var(--brand-accent-rgb, 37, 99, 235), 0.3)`"></div>
+                     </div>
+                     <div class="flex justify-between items-center">
+                         <span class="text-[9px] text-gray-400 font-bold">1 of 10 tasks</span>
+                         <i class="uil uil-check-circle text-brand-accent text-base"></i>
+                     </div>
+                 </div>
+
+                 <!-- Dynamic Remaining Slides -->
+                 <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+                    <div x-show="activeSlide === index + 1"
                          x-transition:enter="transition ease-out duration-700"
                          x-transition:enter-start="opacity-0 translate-y-4"
                          x-transition:enter-end="opacity-100 translate-y-0"
@@ -589,8 +727,22 @@
 
             <!-- Node 4: Top Right -->
             <div class="hero-floating-card top-[8%] right-[0%] sm:top-[8%] sm:right-[4%] w-[120px] sm:w-[200px] md:w-[320px] floating-node-4 orbit-float aspect-[4/3] opacity-40 sm:opacity-100" style="animation-delay: -0.5s;">
-                 <template x-for="(slide, index) in slides" :key="index">
-                    <img x-show="activeSlide === index"
+                 <!-- Static Initial Image -->
+                 <img x-show="activeSlide === 0"
+                      src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80" 
+                      x-transition:enter="transition ease-out duration-700 delay-200"
+                      x-transition:enter-start="opacity-0 scale-90"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:leave="transition ease-in duration-500 absolute inset-0"
+                      x-transition:leave-start="opacity-100 scale-100"
+                      x-transition:leave-end="opacity-0 scale-90"
+                      class="transform rotate-6 rounded-2xl shadow-xl w-full h-full object-cover" 
+                      fetchpriority="high"
+                      loading="eager" />
+
+                 <!-- Dynamic Remaining Slides -->
+                 <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+                    <img x-show="activeSlide === index + 1"
                          :src="slide.img3" 
                          x-transition:enter="transition ease-out duration-700 delay-200"
                          x-transition:enter-start="opacity-0 scale-90"
@@ -598,7 +750,9 @@
                          x-transition:leave="transition ease-in duration-500 absolute inset-0"
                          x-transition:leave-start="opacity-100 scale-100"
                          x-transition:leave-end="opacity-0 scale-90"
-                         class="transform rotate-6 rounded-2xl shadow-xl w-full h-full object-cover" />
+                         class="transform rotate-6 rounded-2xl shadow-xl w-full h-full object-cover" 
+                         fetchpriority="high"
+                         loading="eager" />
                 </template>
             </div>
 
@@ -619,8 +773,22 @@
 
             <!-- Node 6: Middle Right -->
             <div class="hero-floating-card top-[52%] right-[6%] w-[140px] md:w-[240px] floating-node-6 orbit-float aspect-square hidden sm:block" style="animation-delay: -2.5s;">
-                 <template x-for="(slide, index) in slides" :key="index">
-                    <img x-show="activeSlide === index"
+                 <!-- Static Initial Image -->
+                 <img x-show="activeSlide === 0"
+                      src="https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=600&q=80" 
+                      x-transition:enter="transition ease-out duration-700 delay-75"
+                      x-transition:enter-start="opacity-0 scale-90"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:leave="transition ease-in duration-500 absolute inset-0"
+                      x-transition:leave-start="opacity-100 scale-100"
+                      x-transition:leave-end="opacity-0 scale-90"
+                      class="transform -rotate-3 rounded-2xl shadow-xl w-full h-full object-cover" 
+                      fetchpriority="high"
+                      loading="eager" />
+
+                 <!-- Dynamic Remaining Slides -->
+                 <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+                    <img x-show="activeSlide === index + 1"
                          :src="slide.img4" 
                          x-transition:enter="transition ease-out duration-700 delay-75"
                          x-transition:enter-start="opacity-0 scale-90"
@@ -628,7 +796,9 @@
                          x-transition:leave="transition ease-in duration-500 absolute inset-0"
                          x-transition:leave-start="opacity-100 scale-100"
                          x-transition:leave-end="opacity-0 scale-90"
-                         class="transform -rotate-3 rounded-2xl shadow-xl w-full h-full object-cover" />
+                         class="transform -rotate-3 rounded-2xl shadow-xl w-full h-full object-cover" 
+                         fetchpriority="high"
+                         loading="eager" />
                 </template>
             </div>
         </div>
@@ -1173,16 +1343,18 @@
                 <h2 class="text-4xl md:text-5xl font-heading font-bold">What Our <span class="gradient-text">Clients</span> Say?</h2>
             </div>
             
-            <!-- Marquee Container for Reviews -->
-            <div class="overflow-hidden py-10 relative">
-                <div class="flex scroll-left hover:pause">
+            <!-- Reviews Scroll Container -->
+            <div class="relative py-10" 
+                 x-data="{ total: 5, current: 0 }" 
+                 @update-index.window="if($event.detail.id === 'reviews-slider') current = $event.detail.index">
+                <div class="reviews-wrapper invisible-scrollbar" id="reviews-slider">
                     <!-- Review Card 1 -->
-                    <div class="review-card flex-shrink-0 w-[400px] px-4">
-                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-full flex flex-col">
+                    <div class="review-card px-4">
+                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-[320px] flex flex-col">
                             <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
                                 <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
                             </div>
-                            <p class="text-gray-600 mb-8 italic text-sm flex-grow">"Their web development team entirely transformed our outdated portal into a modern, lightning-fast application. Revenue increased by 40% in two months."</p>
+                            <p class="text-gray-600 mb-8 italic text-sm flex-grow leading-relaxed">"Their web development team entirely transformed our outdated portal into a modern, lightning-fast application. Revenue increased by 40% in two months."</p>
                             <div class="flex items-center gap-4">
                                 <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
                                 <div>
@@ -1193,12 +1365,12 @@
                         </div>
                     </div>
                     <!-- Review Card 2 -->
-                    <div class="review-card flex-shrink-0 w-[400px] px-4">
-                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-full flex flex-col">
+                    <div class="review-card px-4">
+                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-[320px] flex flex-col">
                             <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
                                 <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
                             </div>
-                            <p class="text-gray-600 mb-8 italic text-sm flex-grow">"Unmatched professionalism and UI/UX capability. The interface they designed is clean, corporate, and highly intuitive. Highly recommend Sahasra."</p>
+                            <p class="text-gray-600 mb-8 italic text-sm flex-grow leading-relaxed">"Unmatched professionalism and UI/UX capability. The interface they designed is clean, corporate, and highly intuitive. Highly recommend Sahasra."</p>
                             <div class="flex items-center gap-4">
                                 <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
                                 <div>
@@ -1209,12 +1381,12 @@
                         </div>
                     </div>
                     <!-- Review Card 3 -->
-                    <div class="review-card flex-shrink-0 w-[400px] px-4">
-                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-full flex flex-col">
+                    <div class="review-card px-4">
+                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-[320px] flex flex-col">
                             <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
                                 <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
                             </div>
-                            <p class="text-gray-600 mb-8 italic text-sm flex-grow">"We needed robust digital marketing and reliable IT management. They overdelivered on both fronts, ensuring zero downtime and great leads."</p>
+                            <p class="text-gray-600 mb-8 italic text-sm flex-grow leading-relaxed">"We needed robust digital marketing and reliable IT management. They overdelivered on both fronts, ensuring zero downtime and great leads."</p>
                             <div class="flex items-center gap-4">
                                 <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
                                 <div>
@@ -1224,53 +1396,46 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Review Card 4 -->
+                    <div class="review-card px-4">
+                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-[320px] flex flex-col">
+                            <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
+                                <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-8 italic text-sm flex-grow leading-relaxed">"Sahasra's expertise in E-commerce scaling is top-tier. Our conversion rates doubled within the first month of the new launch."</p>
+                            <div class="flex items-center gap-4">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
+                                <div>
+                                    <h5 class="font-bold text-sm">Sarah Jenkins</h5>
+                                    <span class="text-xs text-gray-500">COO, FashionHub</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Review Card 5 -->
+                    <div class="review-card px-4">
+                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-[320px] flex flex-col">
+                            <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
+                                <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
+                            </div>
+                            <p class="text-gray-600 mb-8 italic text-sm flex-grow leading-relaxed">"Technical excellence combined with a deep understanding of business goals. They aren't just vendors, they are partners."</p>
+                            <div class="flex items-center gap-4">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
+                                <div>
+                                    <h5 class="font-bold text-sm">Robert Fox</h5>
+                                    <span class="text-xs text-gray-500">VP Eng, DataFlow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Duplicated for Loop -->
-                    <div class="review-card flex-shrink-0 w-[400px] px-4">
-                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-full flex flex-col">
-                            <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
-                                <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
-                            </div>
-                            <p class="text-gray-600 mb-8 italic text-sm flex-grow">"Their web development team entirely transformed our outdated portal into a modern, lightning-fast application. Revenue increased by 40% in two months."</p>
-                            <div class="flex items-center gap-4">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
-                                <div>
-                                    <h5 class="font-bold text-sm">John Doe</h5>
-                                    <span class="text-xs text-gray-500">CEO, TechStartup</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-card flex-shrink-0 w-[400px] px-4">
-                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-full flex flex-col">
-                            <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
-                                <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
-                            </div>
-                            <p class="text-gray-600 mb-8 italic text-sm flex-grow">"Unmatched professionalism and UI/UX capability. The interface they designed is clean, corporate, and highly intuitive. Highly recommend Sahasra."</p>
-                            <div class="flex items-center gap-4">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
-                                <div>
-                                    <h5 class="font-bold text-sm">Emma Watson</h5>
-                                    <span class="text-xs text-gray-500">Director, Growth Corp</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-card flex-shrink-0 w-[400px] px-4">
-                        <div class="tilt-inner bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 ease-out border border-gray-100 h-full flex flex-col">
-                            <div class="flex items-center gap-1 text-yellow-500 mb-6 text-sm">
-                                <i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i><i class="uil uil-star"></i>
-                            </div>
-                            <p class="text-gray-600 mb-8 italic text-sm flex-grow">"We needed robust digital marketing and reliable IT management. They overdelivered on both fronts, ensuring zero downtime and great leads."</p>
-                            <div class="flex items-center gap-4">
-                                <img src="https://randomuser.me/api/portraits/men/86.jpg" alt="User" class="w-12 h-12 rounded-full object-cover">
-                                <div>
-                                    <h5 class="font-bold text-sm">Alex Smith</h5>
-                                    <span class="text-xs text-gray-500">Founder, AlexStores</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Navigation Dots -->
+                <div class="reviews-nav">
+                    <template x-for="i in total" :key="i">
+                        <button @click="scrollToReview(i-1)"
+                                :class="current === (i-1) ? 'active' : ''"></button>
+                    </template>
                 </div>
             </div>
                 </div>
@@ -2063,6 +2228,135 @@
                     });
                 });
             });
+            // --- PROJECT CAROUSEL: MOUSE WHEEL & DRAG-TO-SCROLL ---
+            const projectsWrapper = document.querySelector('.projects-wrapper');
+            if (projectsWrapper) {
+                projectsWrapper.addEventListener('wheel', (e) => {
+                    if (e.deltaY !== 0) {
+                        e.preventDefault();
+                        projectsWrapper.scrollLeft += e.deltaY;
+                    }
+                }, { passive: false });
+
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                projectsWrapper.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    projectsWrapper.classList.add('dragging');
+                    startX = e.pageX - projectsWrapper.offsetLeft;
+                    scrollLeft = projectsWrapper.scrollLeft;
+                });
+                projectsWrapper.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    projectsWrapper.classList.remove('dragging');
+                });
+                projectsWrapper.addEventListener('mouseup', () => {
+                    isDown = false;
+                    projectsWrapper.classList.remove('dragging');
+                });
+                projectsWrapper.addEventListener('mousemove', (e) => {
+                    if(!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - projectsWrapper.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    projectsWrapper.scrollLeft = scrollLeft - walk;
+                });
+            }
+
+            // --- REVIEWS CAROUSEL: HYBRID INTERACTION ---
+            const reviewsWrapper = document.getElementById('reviews-slider');
+            if (reviewsWrapper) {
+                let isReviewDown = false;
+                let startXReview;
+                let scrollLeftReview;
+                let reviewAutoPlay;
+
+                const startAutoPlay = () => {
+                    clearInterval(reviewAutoPlay);
+                    reviewAutoPlay = setInterval(() => {
+                        if (!isReviewDown) {
+                            let maxScroll = reviewsWrapper.scrollWidth - reviewsWrapper.clientWidth;
+                            if (reviewsWrapper.scrollLeft >= maxScroll - 2) {
+                                reviewsWrapper.scrollLeft = 0;
+                            } else {
+                                reviewsWrapper.scrollLeft += 1;
+                            }
+                        }
+                    }, 25);
+                };
+
+                startAutoPlay();
+
+                // 1. Mouse Wheel
+                reviewsWrapper.addEventListener('wheel', (e) => {
+                    if (e.deltaY !== 0) {
+                        e.preventDefault();
+                        reviewsWrapper.scrollLeft += e.deltaY;
+                        clearInterval(reviewAutoPlay);
+                        clearTimeout(reviewsWrapper.resumeTimer);
+                        reviewsWrapper.resumeTimer = setTimeout(startAutoPlay, 3000);
+                    }
+                }, { passive: false });
+
+                // 2. Drag
+                reviewsWrapper.addEventListener('mousedown', (e) => {
+                    isReviewDown = true;
+                    reviewsWrapper.classList.add('dragging');
+                    startXReview = e.pageX - reviewsWrapper.offsetLeft;
+                    scrollLeftReview = reviewsWrapper.scrollLeft;
+                    clearInterval(reviewAutoPlay);
+                });
+                reviewsWrapper.addEventListener('mouseleave', () => {
+                    if(isReviewDown) {
+                        isReviewDown = false;
+                        reviewsWrapper.classList.remove('dragging');
+                        startAutoPlay();
+                    }
+                });
+                reviewsWrapper.addEventListener('mouseup', () => {
+                    isReviewDown = false;
+                    reviewsWrapper.classList.remove('dragging');
+                    startAutoPlay();
+                });
+                reviewsWrapper.addEventListener('mousemove', (e) => {
+                    if(!isReviewDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - reviewsWrapper.offsetLeft;
+                    const walk = (x - startXReview) * 1.5;
+                    reviewsWrapper.scrollLeft = scrollLeftReview - walk;
+                });
+
+                // Dot Syncing
+                reviewsWrapper.addEventListener('scroll', () => {
+                    const scrollPos = reviewsWrapper.scrollLeft;
+                    const cardWidth = 450;
+                    const index = Math.round(scrollPos / cardWidth);
+                    
+                    window.dispatchEvent(new CustomEvent('update-index', { 
+                        detail: { id: 'reviews-slider', index: index } 
+                    }));
+                });
+
+                // Global Scroll Helper for dots
+                window.scrollToReview = (index) => {
+                    clearInterval(reviewAutoPlay);
+                    const cardWidth = 450;
+                    reviewsWrapper.scrollTo({
+                        left: index * cardWidth,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Manually trigger the event just in case
+                    window.dispatchEvent(new CustomEvent('update-index', { 
+                        detail: { id: 'reviews-slider', index: index } 
+                    }));
+
+                    clearTimeout(reviewsWrapper.resumeTimer);
+                    reviewsWrapper.resumeTimer = setTimeout(startAutoPlay, 5000);
+                };
+            }
         }
 
     </script>
