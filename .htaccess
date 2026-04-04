@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# 1. Redirect legacy underscore HTML links to modern hyphenated PHP links
+RewriteRule ^website_design\.html$ services/website-design.php [R=301,L]
+RewriteRule ^web_development\.html$ services/web-development.php [R=301,L]
+RewriteRule ^hosting\.html$ services/hosting.php [R=301,L]
+RewriteRule ^digital_marketing\.html$ services/digital-marketing.php [R=301,L]
+
+# 2. General rule: Redirect any .html request to the .php equivalent if it exists in services
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.html$ services/$1.php [R=301,L]
+
+# 3. Clean URLs (Optional: hide .php extension)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]

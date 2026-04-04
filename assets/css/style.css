@@ -1,0 +1,417 @@
+/* --- SAHASRA BARATH PRO MAX DESIGN SYSTEM --- */
+
+/* Root Variables */
+:root {
+    --brand-primary: var(--brand-accent, #2563EB);
+    --brand-secondary: var(--brand-accent-end, #00D4FF);
+    --brand-accent: var(--brand-accent, #2563EB);
+    --brand-dark: #0f172a;
+    --brand-gray: #f8fafc;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #334155;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-heading {
+    font-family: 'Outfit', sans-serif;
+}
+
+.gradient-text {
+    display: inline-block;
+    color: var(--brand-accent, #2563EB); /* Fallback */
+    background: linear-gradient(135deg, var(--brand-accent-start, #2563EB) 0%, var(--brand-accent-end, #00D4FF) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-glow {
+    text-shadow: 0 0 15px rgba(var(--brand-accent-rgb, 37, 99, 235), 0.4);
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, var(--brand-accent-start, #2563EB) 0%, var(--brand-accent-end, #00D4FF) 100%);
+}
+
+.glass-morphism {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* --- PRO BUTTON SYSTEM (Pro Max) --- */
+.btn-7, .btn-7-reverse {
+    padding: 14px 38px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden !important;
+    z-index: 1;
+    border: none;
+    cursor: pointer;
+    color: white !important;
+    animation: btn-dance 3s ease-in-out infinite; /* Automatic Dancing */
+}
+
+@keyframes btn-dance {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-5px) scale(1.02); }
+}
+
+@keyframes shimmer-automatic {
+    0% { left: -150%; }
+    30% { left: 250%; }
+    100% { left: 250%; }
+}
+
+.btn-7::before, .btn-7-reverse::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    transition: all 0.4s ease;
+}
+
+.btn-7::before {
+    background: linear-gradient(135deg, var(--brand-accent-start, #2563EB) 0%, var(--brand-accent-end, #00D4FF) 100%);
+}
+
+.btn-7-reverse::before {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-7::after, .btn-7-reverse::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    z-index: -1;
+    pointer-events: none;
+    animation: shimmer-automatic 6s linear infinite; /* Automatic Dancing Shimmer */
+}
+
+.btn-7:hover::after, .btn-7-reverse:hover::after {
+    left: 200%;
+    transition: all 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn-7:hover, .btn-7-reverse:hover {
+    transform: translateY(-8px) scale(1.06);
+    box-shadow: 0 25px 50px rgba(var(--brand-accent-rgb, 37, 99, 235), 0.5);
+    animation-play-state: paused; /* Pause dancing when user interacts */
+}
+
+.btn-7:hover::after, .btn-7-reverse:hover::after {
+    animation-play-state: paused;
+}
+
+.btn-7:hover::before {
+    filter: brightness(1.15);
+}
+
+.btn-7-reverse:hover::before {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #00D4FF;
+}
+
+/* Side Floating CTA */
+.btn-7-vertical {
+    background: linear-gradient(180deg, var(--brand-accent-start, #2563EB) 0%, var(--brand-accent-end, #00D4FF) 100%);
+    color: white !important;
+    padding: 25px 12px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: -5px 0 25px rgba(var(--brand-accent-rgb, 37, 99, 235), 0.3);
+    text-decoration: none !important;
+    z-index: 100;
+}
+.btn-7-vertical:hover {
+    padding-right: 25px;
+    transform: translateY(-50%) translateX(-8px);
+    box-shadow: -10px 10px 40px rgba(13, 65, 225, 0.4);
+}
+
+/* Modern FAQ */
+.faq-item {
+    border-bottom: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-header {
+    padding: 24px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.faq-header h4 {
+    color: #1e293b;
+    margin: 0;
+    transition: all 0.3s ease;
+    font-size: 16px; /* Decreased font size as requested */
+    font-weight: 600;
+}
+.faq-item.active .faq-header h4 {
+    color: #0d41e1;
+}
+.faq-icon {
+    font-size: 20px;
+    color: #94a3b8;
+    transition: all 0.4s ease;
+}
+.faq-item.active .faq-icon {
+    color: #0d41e1;
+    transform: rotate(180deg);
+}
+.faq-content {
+    padding: 0 0 24px 0;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+        .cardserv > .wrap .title { font-size: 22px; line-height: 1.3; font-weight: 700; margin: 0 0 10px; color: #0A192F; }
+        .cardserv > .wrap p { color: #64748B; font-size: 15px; margin: 0 0 15px; line-height: 1.5; }
+
+/* Footer link animation */
+.footer-link {
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+.footer-link:hover {
+    color: #00D4FF !important;
+    transform: translateX(8px);
+}
+.footer-social-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    color: white;
+}
+.footer-social-icon:hover {
+    background: linear-gradient(135deg, var(--brand-accent-start, #2563EB) 0%, var(--brand-accent-end, #00D4FF) 100%);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(var(--brand-accent-rgb, 37, 99, 235), 0.3);
+}
+
+/* DUAL MARQUEE */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: white;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+.marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 80px;
+    align-items: center;
+}
+.scroll-left { animation: scroll-left 40s linear infinite; }
+.scroll-right { animation: scroll-right 40s linear infinite; }
+.client-logo {
+    flex-shrink: 0;
+    height: 38px;
+    max-width: 160px;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.6);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.client-logo:hover {
+    filter: grayscale(0) opacity(1);
+    transform: scale(1.15) translateY(-5px);
+}
+@keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes scroll-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+/* Animations */
+.reveal { 
+    opacity: 1; 
+    will-change: transform, opacity;
+}
+.reveal.active { 
+    transform: translateY(0); 
+}
+
+/* Sticky Header Glassmorphism */
+nav.scrolled {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    padding: 10px 0;
+}
+
+/* --- PREMIUM PRICING SYSTEM --- */
+.pricing-card {
+    background: white;
+    border-radius: 32px;
+    padding: 3rem;
+    border: 1px solid #f1f5f9;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 40px 80px rgba(13, 65, 225, 0.1);
+    border-color: rgba(13, 65, 225, 0.2);
+}
+
+.pricing-card.bg-brand-dark { background-color: #0f172a !important; }
+.text-readable-white { color: #f8fafc !important; }
+.text-readable-gray { color: #cbd5e1 !important; }
+
+.pricing-card.featured {
+    background: var(--brand-dark);
+    color: white;
+    border: none;
+    box-shadow: 0 30px 60px rgba(13, 65, 225, 0.3);
+}
+
+.pricing-card.featured .pricing-feature i {
+    color: var(--brand-accent);
+}
+
+.pricing-header h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.pricing-price {
+    font-size: 48px;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 2rem;
+}
+
+.pricing-price span {
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.pricing-features {
+    margin-bottom: 3rem;
+    flex-grow: 1;
+}
+
+.pricing-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+    font-size: 15px;
+}
+
+.pricing-feature i {
+    color: #10b981;
+    font-size: 18px;
+}
+
+.premium-badge {
+    position: absolute;
+    top: 24px;
+    right: -32px;
+    background: var(--brand-accent);
+    color: var(--brand-dark);
+    padding: 8px 40px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    letter-spacing: 1px;
+}
+
+/* --- TEXT READABILITY FIXES --- */
+.text-readable {
+    color: #1e293b !important;
+    line-height: 1.8;
+}
+
+.text-white-readable {
+    color: #f8fafc !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Footer improvements */
+footer {
+    color: #94a3b8 !important; /* Brighter gray for visibility on dark */
+}
+footer p {
+    color: #cbd5e1 !important; /* Even brighter for small text */
+}
+
+/* Dense Content Utilities */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.info-item {
+    border-left: 3px solid var(--brand-accent);
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+[x-cloak] { display: none !important; }
+
+/* --- FEATURE CARD OPTIMIZATION (Why Choose Cards) --- */
+.sahasra-feature-card {
+    padding: 1.5rem !important; /* Decreased padding to reduce card size */
+    border-radius: 24px !important; /* Slightly more compact radius */
+}
+
+/* Icon visibility */
+.sahasra-feature-card i {
+    font-size: 2.25rem !important;
+}
+
+/* Heading - increased size */
+.sahasra-feature-card h4 {
+    font-size: 1.75rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.2 !important;
+}
+
+/* Description - increased size (text-base) */
+.sahasra-feature-card p {
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    opacity: 0.8 !important;
+    font-weight: 500 !important;
+}
+
