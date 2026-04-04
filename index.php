@@ -216,7 +216,52 @@
         }
         .projects-wrapper {
             display: flex;
-            width: max-content;
+            flex-wrap: nowrap;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            overscroll-behavior-x: contain;
+            touch-action: pan-x;
+        }
+        .projects-wrapper .project-card {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        .projects-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        .projects-wrapper .project-card {
+            scroll-snap-align: start;
+        }
+        .projects-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .projects-nav button {
+            width: 14px;
+            height: 14px;
+            border-radius: 9999px;
+            border: 1px solid rgba(37, 99, 235, 0.35);
+            background: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .projects-nav button.active,
+        .projects-nav button:hover {
+            width: 18px;
+            height: 18px;
+            background: #2563EB;
+            border-color: transparent;
+        }
+        .projects-wrapper.dragging {
+            cursor: grabbing;
         }
         .tilt-inner {
             transform-style: preserve-3d;
@@ -862,7 +907,7 @@
         
         <!-- Marquee Container (Auto-Scrolling Projects) -->
         <div class="projects-marquee py-10 relative">
-            <div class="projects-wrapper flex scroll-left hover:pause">
+            <div class="projects-wrapper flex">
                 <!-- Project Card 1: E-Commerce -->
                 <a href="products/ecommerce-platform.php" class="project-card flex-shrink-0 w-[400px] px-4 group block">
                     <div class="tilt-inner bg-white rounded-3xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full">
@@ -976,6 +1021,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="projects-nav">
+                <button type="button" class="project-dot active" data-index="0" aria-label="Show project 1"></button>
+                <button type="button" class="project-dot" data-index="1" aria-label="Show project 2"></button>
+                <button type="button" class="project-dot" data-index="2" aria-label="Show project 3"></button>
             </div>
         </div>
 
@@ -1309,15 +1359,9 @@
                         </div>
                     </div>
                 </div>
-
-            
-
-              
-
-              
-
-    </div>
-  </div>
+            </div>
+        </div>
+    </section>
 
 <br/>
     <section id="faq" class="py-24 bg-brand-gray/30 overflow-hidden">
@@ -1555,6 +1599,7 @@
             // Initialize Engines
             initThreeJS();
             initHeroSlider();
+            initProjectMarquee();
             initGlobalAnimations();
             
             // Remove Loader
@@ -1630,6 +1675,138 @@
             if (document.querySelectorAll('.slide-image').length === 0) return;
             setInterval(nextSlide, 7000);
             updateSlide(0);
+        }
+
+        function initProjectMarquee() {
+            const container = document.querySelector('.projects-wrapper');
+            const dots = document.querySelectorAll('.project-dot');
+            if (!container || dots.length === 0) return;
+
+            let isDragging = false;
+            let startX = 0;
+            let startScroll = 0;
+            let autoScrollTimer = null;
+            const cards = Array.from(container.querySelectorAll('.project-card'));
+            const projectTargets = cards.slice(0, 3);
+
+            const setActiveDot = (index) => {
+                dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            };
+
+            const scrollToProject = (index) => {
+                const card = projectTargets[index];
+                if (!card) return;
+                container.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+                setActiveDot(index);
+            };
+
+            const stopAutoScroll = () => {
+                if (autoScrollTimer) {
+                    clearInterval(autoScrollTimer);
+                    autoScrollTimer = null;
+                }
+            };
+
+            const startAutoScroll = () => {
+                stopAutoScroll();
+                autoScrollTimer = setInterval(() => {
+                    if (isDragging) return;
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    if (container.scrollLeft >= maxScroll - 2) {
+                        container.scrollLeft = 0;
+                        setActiveDot(0);
+                    } else {
+                        container.scrollLeft += 1;
+                    }
+                    updateActiveDotOnScroll();
+                }, 18);
+            };
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = Number(dot.dataset.index);
+                    scrollToProject(index);
+                    stopAutoScroll();
+                    setTimeout(startAutoScroll, 4000);
+                });
+            });
+
+            const updateActiveDotOnScroll = () => {
+                const positions = projectTargets.map(card => Math.abs(card.offsetLeft - container.scrollLeft));
+                const nearest = positions.indexOf(Math.min(...positions));
+                setActiveDot(nearest);
+            };
+
+            container.addEventListener('mousedown', (event) => {
+                isDragging = true;
+                container.classList.add('dragging');
+                const rect = container.getBoundingClientRect();
+                startX = event.clientX - rect.left;
+                startScroll = container.scrollLeft;
+                stopAutoScroll();
+            });
+
+            container.addEventListener('mousemove', (event) => {
+                if (!isDragging) return;
+                event.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const walk = (x - startX) * 1.2;
+                container.scrollLeft = startScroll - walk;
+                updateActiveDotOnScroll();
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                container.classList.remove('dragging');
+                setTimeout(startAutoScroll, 1000);
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                container.classList.remove('dragging');
+                setTimeout(startAutoScroll, 1000);
+            });
+
+            container.addEventListener('touchstart', (event) => {
+                isDragging = true;
+                const rect = container.getBoundingClientRect();
+                startX = event.touches[0].clientX - rect.left;
+                startScroll = container.scrollLeft;
+                stopAutoScroll();
+            }, { passive: true });
+
+            container.addEventListener('touchmove', (event) => {
+                if (!isDragging) return;
+                const rect = container.getBoundingClientRect();
+                const x = event.touches[0].clientX - rect.left;
+                const walk = (x - startX) * 1.2;
+                container.scrollLeft = startScroll - walk;
+                updateActiveDotOnScroll();
+            }, { passive: false });
+
+            container.addEventListener('touchend', () => {
+                isDragging = false;
+                setTimeout(startAutoScroll, 1000);
+            });
+
+            container.addEventListener('wheel', (event) => {
+                if (Math.abs(event.deltaX) > 0 || Math.abs(event.deltaY) > 0) {
+                    event.preventDefault();
+                    container.scrollLeft += event.deltaY || event.deltaX;
+                    updateActiveDotOnScroll();
+                    stopAutoScroll();
+                    setTimeout(startAutoScroll, 1500);
+                }
+            }, { passive: false });
+
+            container.addEventListener('scroll', () => {
+                if (!isDragging) updateActiveDotOnScroll();
+            });
+
+            startAutoScroll();
         }
 
         // --- GLOBAL THREE.JS ENGINE ---
