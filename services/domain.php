@@ -185,7 +185,7 @@
                         </div>
                     </div>
 
-                    <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg hover:shadow-brand-accent/30">
+                    <a href="<?php echo $root; ?>contact.php" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg hover:shadow-brand-accent/30">
                         <i class="uil uil-headset"></i> Talk to Expert
                     </a>
                 </div>
@@ -252,7 +252,7 @@
                     <div class="text-5xl font-black mb-1 font-heading tracking-tighter text-brand-dark group-hover:text-brand-accent transition-colors">.com</div>
                     <p class="text-[10px] opacity-60 mb-4 font-medium uppercase tracking-wider">Global business & brands</p>
                     <div class="text-3xl font-black gradient-text mb-6">₹999 <span class="text-xs opacity-50 font-medium tracking-normal lowercase">/ year</span></div>
-                    <button class="w-full py-3 rounded-xl border-2 border-brand-accent/20 text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-sm">Register Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-3 rounded-xl border-2 border-brand-accent/20 text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-sm block text-center">Register Now</a>
                 </div>
 
                 <!-- .in Card (Popular) -->
@@ -261,7 +261,7 @@
                     <div class="text-6xl font-black mb-1 font-heading tracking-tighter text-brand-accent">.in</div>
                     <p class="text-[10px] opacity-60 mb-4 font-medium uppercase tracking-wider">Indian websites & startups</p>
                     <div class="text-3xl font-black gradient-text mb-6">₹699 <span class="text-xs opacity-50 font-medium tracking-normal lowercase">/ year</span></div>
-                    <button class="w-full py-3.5 gradient-bg text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg hover:scale-[1.02] transition-all">Register Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-3.5 gradient-bg text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg hover:scale-[1.02] transition-all block text-center">Register Now</a>
                 </div>
 
                 <!-- .net Card -->
@@ -269,7 +269,7 @@
                     <div class="text-5xl font-black mb-1 font-heading tracking-tighter text-brand-dark group-hover:text-brand-accent transition-colors">.net</div>
                     <p class="text-[10px] opacity-60 mb-4 font-medium uppercase tracking-wider">Technology & services</p>
                     <div class="text-3xl font-black gradient-text mb-6">₹1,199 <span class="text-xs opacity-50 font-medium tracking-normal lowercase">/ year</span></div>
-                    <button class="w-full py-3 rounded-xl border-2 border-brand-accent/20 text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-sm">Register Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-3 rounded-xl border-2 border-brand-accent/20 text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-sm block text-center">Register Now</a>
                 </div>
 
                 <!-- .org Card -->
@@ -277,7 +277,7 @@
                     <div class="text-5xl font-black mb-1 font-heading tracking-tighter text-brand-dark group-hover:text-brand-accent transition-colors">.org</div>
                     <p class="text-[10px] opacity-60 mb-4 font-medium uppercase tracking-wider">Organizations & NGOs</p>
                     <div class="text-3xl font-black gradient-text mb-6">₹899 <span class="text-xs opacity-50 font-medium tracking-normal lowercase">/ year</span></div>
-                    <button class="w-full py-3 rounded-xl border-2 border-brand-accent/20 text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-sm">Register Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-3 rounded-xl border-2 border-brand-accent/20 text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-sm block text-center">Register Now</a>
                 </div>
             </div>
 
@@ -654,10 +654,10 @@
                 <p class="opacity-60 max-w-2xl mx-auto mb-10 text-sm md:text-lg leading-relaxed relative z-10">Protect your identity before someone else does. Our domain infrastructure ensures your brand remains secure, private, and always online.</p>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                    <a href="<?php echo $root; ?>index.php#contact" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all">
+                    <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all block text-center">
                         Register Domain Now
                     </a>
-                    <a href="tel:+919876543210" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg">
+                    <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg block text-center">
                         Talk to an Expert
                     </a>
                 </div>

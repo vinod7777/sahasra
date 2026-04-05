@@ -28,7 +28,7 @@
     <div class="w-full text-white text-sm relative z-[1001] gradient-bg top-bar-custom">
         <div class="container mx-auto px-6 md:px-12 flex justify-between items-center py-1.5">
             <div class="flex gap-6 items-center">
-                <a href="mailto:info@sahasra.com" class="flex items-center gap-2 hover:opacity-80"><i class="uil uil-envelope text-lg"></i> info@sahasra.com</a>
+                <a href="mailto:sahasrabharat7@gmail.com" class="flex items-center gap-2 hover:opacity-80"><i class="uil uil-envelope text-lg"></i> sahasrabharat7@gmail.com</a>
                 <a href="tel:+918885526751" class="flex items-center gap-2 hover:opacity-80"><i class="uil uil-phone text-lg"></i> </a>
             </div>
             <div class="flex gap-4 items-center text-lg">
@@ -40,216 +40,217 @@
         </div>
     </div>
 
-    <header class="sticky top-0 w-full z-[1000] transition-all duration-300 shadow-sm bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-100 dark:border-white/5" 
+    <header class="sticky top-0 w-full z-[1000] h-[70px] transition-all duration-300 shadow-sm bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-100 dark:border-white/5" 
             x-data="{ mobileMenuOpen: false, mobileServicesOpen: false, mobileProductsOpen: false, scrolled: false }" 
             @scroll.window="scrolled = (window.pageYOffset > 50)"
             :class="{'shadow-lg': scrolled}">
         <!-- Main Nav -->
-        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center py-4 relative">
-            <a href="<?php echo $root; ?>index.php" class="flex items-center gap-2 group">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center h-full relative">
+            <a href="<?php echo $root; ?>index.php" class="flex items-center gap-3 group shrink-0">
                 <div class="logo-box-main gradient-bg w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">S</div>
                 <span class="font-heading font-bold text-2xl tracking-tight text-brand-dark dark:text-white transition-colors duration-300">Sahasra Barath<span class="text-brand-accent">.</span></span>
             </a>
  
             <!-- Desktop Menu -->
-            <nav class="hidden lg:flex items-center gap-8 font-semibold text-sm h-full text-brand-dark dark:text-gray-300 transition-colors duration-300">
-                <a href="<?php echo $root; ?>index.php#home" class="hover:text-brand-accent dark:hover:text-brand-accent transition-colors">Home</a>
-                <a href="<?php echo $root; ?>index.php#about" class="hover:text-brand-accent dark:hover:text-brand-accent transition-colors">About Us</a>
+            <nav class="hidden lg:flex items-center gap-7 font-bold text-[13px] uppercase tracking-wider text-brand-dark dark:text-gray-300">
+                <a href="<?php echo $root; ?>index.php#home" class="hover:text-brand-accent transition-colors py-2">Home</a>
+                <a href="<?php echo $root; ?>index.php#about" class="hover:text-brand-accent transition-colors py-2">About Us</a>
                 
                 <!-- Services Mega Menu (Desktop) -->
-                <div class="group h-full py-4 cursor-pointer">
-                    <span class="group-hover:text-brand-accent transition-colors">Services +</span>
-                    <div class="absolute top-full left-0 w-full bg-white dark:bg-slate-900 shadow-2xl border-t-2 border-brand-accent opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-10 grid grid-cols-5 gap-8 -mt-2 z-[70] dark:text-gray-300">
+                <div class="group relative py-2 cursor-pointer h-full flex items-center gap-1">
+                    <span class="group-hover:text-brand-accent transition-colors">Services</span>
+                    <i class="uil uil-angle-down text-lg group-hover:text-brand-accent transition-colors"></i>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 w-[1100px] bg-white dark:bg-slate-900 shadow-[0_30px_100px_rgba(0,0,0,0.15)] border-t-4 border-brand-accent opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-10 grid grid-cols-5 gap-8 mt-0 z-[70] dark:text-gray-300 rounded-b-3xl">
                         <!-- Column 1: Infrastructure -->
                         <div class="space-y-6">
                             <a href="<?php echo $root; ?>services/domain.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 dark:text-gray-100 group-hover/item:text-brand-accent transition-colors">Domain</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Website Identifier</p>
+                                <h4 class="font-bold text-gray-900 dark:text-gray-100 group-hover/item:text-brand-accent transition-colors text-sm">Domain</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Website Identifier</p>
                             </a>
                             <a href="<?php echo $root; ?>services/hosting.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Hosting</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Server Storage</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Hosting</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Server Storage</p>
                             </a>
                             <a href="<?php echo $root; ?>services/emails.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Emails</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Electronic Mail</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Emails</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Electronic Mail</p>
                             </a>
                             <a href="<?php echo $root; ?>services/business-emails.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Business E-Mails</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Professional Correspondence</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Business E-Mails</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Professional Correspondence</p>
                             </a>
                             <a href="<?php echo $root; ?>services/google-suite.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Google Suite</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Cloud Productivity</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Google Suite</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Cloud Productivity</p>
                             </a>
                              <a href="<?php echo $root; ?>services/open-xchange.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Open XChange</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Collaborative Email</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Open XChange</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Collaborative Email</p>
                             </a>
                         </div>
 
                         <!-- Column 2: Development & Design -->
                         <div class="space-y-6 border-l border-gray-100 pl-8">
                              <a href="<?php echo $root; ?>services/website-design.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Website Design</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Digital Aesthetics</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Website Design</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Digital Aesthetics</p>
                             </a>
                             <a href="<?php echo $root; ?>services/web-development.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Web Development</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Website Creation</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Web Development</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Website Creation</p>
                             </a>
                             <a href="<?php echo $root; ?>services/mobile-applications.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Mobile Applications</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Software Programs</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Mobile Applications</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Software Programs</p>
                             </a>
                             <a href="<?php echo $root; ?>services/graphic-design.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Graphic Design</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Visual Communication</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Graphic Design</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Visual Communication</p>
                             </a>
                             <a href="<?php echo $root; ?>services/video-editing.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Video Editing</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Media Manipulation</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Video Editing</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Media Manipulation</p>
                             </a>
                         </div>
 
                         <!-- Column 3: Marketing & SEO -->
                         <div class="space-y-6 border-l border-gray-100 pl-8">
                             <a href="<?php echo $root; ?>services/digital-marketing.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Digital Marketing</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Online Promotion</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Digital Marketing</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Online Promotion</p>
                             </a>
                             <a href="<?php echo $root; ?>services/seo.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">SEO</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Search Optimization</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">SEO</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Search Optimization</p>
                             </a>
                             <a href="<?php echo $root; ?>services/smo.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">SMO</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Social Media optimization</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">SMO</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Social Media optimization</p>
                             </a>
                             <a href="<?php echo $root; ?>services/paid-service.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Paid Service</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Fee-Based Assistance</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Paid Service</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Fee-Based Assistance</p>
                             </a>
                             <a href="<?php echo $root; ?>services/digital-pr.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Digital PR</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Online Reputation</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Digital PR</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Online Reputation</p>
                             </a>
                             <a href="<?php echo $root; ?>services/event-posters.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Event Posters</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Promotional Graphics</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Event Posters</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Promotional Graphics</p>
                             </a>
                         </div>
 
                         <!-- Column 4: Enterprise Solutions -->
                         <div class="space-y-6 border-l border-gray-100 pl-8">
                              <a href="<?php echo $root; ?>services/staffing.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Staffing</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Personnel Management</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Staffing</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Personnel Management</p>
                             </a>
                             <a href="<?php echo $root; ?>services/autocad.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">AutoCad</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Design Software</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">AutoCad</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Design Software</p>
                             </a>
                             <a href="<?php echo $root; ?>services/middleware.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Middleware</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Intermediary Software</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Middleware</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Intermediary Software</p>
                             </a>
                             <a href="<?php echo $root; ?>services/salesforce.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 dark:text-gray-100 group-hover/item:text-brand-accent transition-colors">Salesforce</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Cloud CRM</p>
+                                <h4 class="font-bold text-gray-900 dark:text-gray-100 group-hover/item:text-brand-accent transition-colors text-sm">Salesforce</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Cloud CRM</p>
                             </a>
                         </div>
 
                         <!-- Column 5: Communication -->
                         <div class="space-y-6 border-l border-gray-100 pl-8">
                             <a href="<?php echo $root; ?>services/bulk-sms.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Bulk SMS</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Mass Text Messaging</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Bulk SMS</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Mass Text Messaging</p>
                             </a>
                             <a href="<?php echo $root; ?>services/url-shortener.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">URL Shortner</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Condensed Link</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">URL Shortner</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Condensed Link</p>
                             </a>
                             <a href="<?php echo $root; ?>services/ivr-calls.php" class="hover:text-brand-accent group/item block">
-                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">IVR Calls</h4>
-                                <p class="text-[11px] text-gray-400 font-normal uppercase tracking-tighter">Automated Calls</p>
+                                <h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">IVR Calls</h4>
+                                <p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-0.5">Automated Calls</p>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Products Mega Menu Dropdown -->
-                <div class="group h-full py-4 cursor-pointer">
-                    <span class="group-hover:text-brand-accent transition-colors">Products +</span>
-                    <div class="absolute top-full left-0 w-full bg-white dark:bg-slate-900 shadow-2xl border-t-2 border-brand-accent opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-8 grid grid-cols-4 gap-x-8 gap-y-8 -mt-2 z-[70] dark:text-gray-300">
+                <div class="group relative py-2 cursor-pointer h-full flex items-center gap-1">
+                    <span class="group-hover:text-brand-accent transition-colors">Products</span>
+                    <i class="uil uil-angle-down text-lg group-hover:text-brand-accent transition-colors"></i>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 w-[900px] bg-white dark:bg-slate-900 shadow-[0_30px_100px_rgba(0,0,0,0.15)] border-t-4 border-brand-accent opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-10 grid grid-cols-4 gap-x-8 gap-y-10 mt-0 z-[70] dark:text-gray-300 rounded-b-3xl">
                         <div class="space-y-6">
                             <a href="<?php echo $root; ?>products/smart-crm.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-users-alt text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 dark:text-gray-100 group-hover/item:text-brand-accent transition-colors">Smart CRM</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Sales & Tracking</p></div>
+                                <div><h4 class="font-bold text-gray-900 dark:text-gray-100 group-hover/item:text-brand-accent transition-colors text-sm">Smart CRM</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Sales & Tracking</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/elvi-grow.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-building text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Elvi Grow</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Elevator Monitoring</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Elvi Grow</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Elevator Monitoring</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/opus-lead.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-chart-line text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Opus Lead</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Lead conversion</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Opus Lead</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Lead conversion</p></div>
                             </a>
                         </div>
                         <div class="space-y-6">
                             <a href="<?php echo $root; ?>products/office-mgmt.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-suitcase-alt text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Office Management</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Productivity Hub</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Office Management</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Productivity Hub</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/ss-smartnous-school.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-graduation-cap text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">School Management</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">SS Smartnous</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">School Management</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">SS Smartnous</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/sc-smartnous-college.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-university text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">College Management</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">SC Smartnous</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">College Management</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">SC Smartnous</p></div>
                             </a>
                         </div>
                         <div class="space-y-6">
                             <a href="<?php echo $root; ?>products/restaurant-mgmt.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-restaurant text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Restaurant</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Kitchen & Orders</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Restaurant</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Kitchen & Orders</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/ecommerce-platform.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-shopping-cart-alt text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Ecommerce</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Scale online</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Ecommerce</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Scale online</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/traffic-plus.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-traffic-light text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Traffic Plus</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Digital Growth</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Traffic Plus</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Digital Growth</p></div>
                             </a>
                         </div>
                         <div class="space-y-6">
                             <a href="<?php echo $root; ?>products/mera-hostel.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-bed text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Mera Hostel</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Smart bookings</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Mera Hostel</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Smart bookings</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/job-portal.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-bag text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Job Portal</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Talent Node</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Job Portal</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Talent Node</p></div>
                             </a>
                             <a href="<?php echo $root; ?>products/real-estate-crm.php" class="flex gap-3 group/item cursor-pointer">
                                 <i class="uil uil-estate text-xl text-brand-accent"></i>
-                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors">Real Estate</h4><p class="text-xs text-gray-500 font-normal mt-1 leading-relaxed">Property Assets</p></div>
+                                <div><h4 class="font-bold text-gray-900 group-hover/item:text-brand-accent transition-colors text-sm">Real Estate</h4><p class="text-[10px] text-gray-400 font-normal uppercase tracking-widest mt-1">Property Assets</p></div>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <a href="<?php echo $root; ?>portfolio.php" class="hover:text-brand-accent transition-colors">Portfolio</a>
-                <a href="<?php echo $root; ?>blog.php" class="hover:text-brand-accent transition-colors">Blog</a>
-                <a href="<?php echo $root; ?>contact.php" class="hover:text-brand-accent transition-colors">Contact Us</a>
+                <a href="<?php echo $root; ?>portfolio.php" class="hover:text-brand-accent transition-colors py-2">Portfolio</a>
+                <a href="<?php echo $root; ?>blog.php" class="hover:text-brand-accent transition-colors py-2">Blog</a>
+                <a href="<?php echo $root; ?>contact.php" class="hover:text-brand-accent transition-colors py-2">Contact Us</a>
 
                 <!-- Refined Color Customizer (Navbar) -->
-                <div class="relative ml-6 pl-6 border-l border-gray-100/30" x-data="{ colorPickerOpen: false }">
-                    <button @click="colorPickerOpen = !colorPickerOpen" class="w-11 h-11 rounded-2xl flex items-center justify-center bg-gray-50/50 hover:bg-white text-brand-accent group shadow-sm transition-all duration-500 overflow-hidden relative" title="Brand Personality">
-                        <div class="absolute inset-0 bg-brand-accent/5 group-hover:bg-brand-accent/10 transition-colors"></div>
-                        <i class="uil uil-palette text-xl relative z-10 group-hover:rotate-12 transition-transform"></i>
+                <div class="relative ml-4 pl-4 border-l border-gray-100 dark:border-white/10" x-data="{ colorPickerOpen: false }">
+                    <button @click="colorPickerOpen = !colorPickerOpen" class="w-10 h-10 rounded-xl flex items-center justify-center bg-gray-50 dark:bg-white/5 hover:bg-white text-brand-accent group shadow-sm transition-all duration-300 relative border border-transparent hover:border-brand-accent/20" title="Brand Personality">
+                        <i class="uil uil-palette text-lg relative z-10 group-hover:rotate-12 transition-transform"></i>
                     </button>
                     <!-- Premium Glassmorphism Palette -->
                     <div x-show="colorPickerOpen" @click.away="colorPickerOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 scale-95" x-transition:enter-end="opacity-100 translate-y-0 scale-100" class="absolute top-full right-0 mt-4 p-5 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/20 z-[100] w-64">

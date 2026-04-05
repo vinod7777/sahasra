@@ -22,7 +22,7 @@
                 <!-- Col 2 -->
                 <div class="lg:pl-10">
                     <h4 class="text-white text-lg font-bold mb-8 font-heading relative inline-block">
-                        Our Services
+                        Other Services
                         <span class="absolute -bottom-2 left-0 w-12 h-1 bg-brand-accent rounded-full"></span>
                     </h4>
                     <ul class="space-y-4">
@@ -62,7 +62,7 @@
                         </li>
                         <li class="flex items-center gap-4 footer-contact-item">
                             <i class="uil uil-envelope text-brand-accent text-xl"></i>
-                            <a href="mailto:info@sahasra.com" class="hover:text-white transition-colors text-[15px]">info@sahasra.com</a>
+                            <a href="mailto:sahasrabharat7@gmail.com" class="hover:text-white transition-colors text-[15px]">sahasrabharat7@gmail.com</a>
                         </li>
                         <li class="flex items-center gap-4 footer-contact-item">
                             <i class="uil uil-phone-alt text-brand-accent text-xl"></i>
@@ -82,4 +82,78 @@
                 </div>
             </div>
         </div>
+        </div>
     </footer>
+
+    <!-- Universal Form Handler Script -->
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQCh-ubpvgR-1BV6HTsKS3i2pFU1SGTzUb2Apb3Li2ijTopwzBPwKa0iVsf-oB255q/exec";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Find all forms on the page
+            const allForms = document.querySelectorAll('form');
+            
+            allForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('button');
+                    if (!submitBtn) return;
+
+                    const originalBtnContent = submitBtn.innerHTML;
+                    
+                    // Visual feedback
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = `
+                        <span class="flex items-center justify-center gap-2">
+                             <svg class="animate-spin h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Sending Inquiry...
+                        </span>
+                    `;
+
+                    // Smart Data Extraction (Works even without name attributes)
+                    const params = new URLSearchParams();
+                    const fields = form.querySelectorAll('input, textarea, select');
+                    
+                    fields.forEach((field, index) => {
+                        const key = field.name || field.placeholder || field.getAttribute('aria-label') || ("Field_" + (index + 1));
+                        if (field.type === 'checkbox') {
+                            if (field.checked) params.append(key, "Yes");
+                        } else if (field.type === 'radio') {
+                            if (field.checked) params.append(key, field.value);
+                        } else {
+                            params.append(key, field.value);
+                        }
+                    });
+                    
+                    // Add Page Info if form_name isn't present
+                    const formName = form.dataset.name || `Form on: ${document.title}`;
+                    params.append('_Form_Source', window.location.href);
+                    params.append('_Form_Name', formName);
+                    params.append('_Timestamp', new Date().toLocaleString());
+
+                    // Send to Google Script
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // Use no-cors for Google Script redirects
+                        body: params
+                    })
+                    .then(() => {
+                        alert("✅ Success! Your inquiry has been received. We will contact you at sahasrabharat7@gmail.com shortly.");
+                        form.reset();
+                    })
+                    .catch(error => {
+                        console.error('Submission Error:', error);
+                        alert("❌ Error: Could not send message. Please try again or email us directly at sahasrabharat7@gmail.com");
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnContent;
+                    });
+                });
+            });
+        });
+    </script>

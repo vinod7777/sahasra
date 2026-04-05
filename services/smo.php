@@ -133,7 +133,7 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 items-center">
-                        <a href="#pulse" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg">The Blueprint</a>
+                        <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg block text-center">The Blueprint</a>
                         <div class="flex -space-x-3">
                             <div class="w-10 h-10 rounded-full border-2 border-white bg-blue-500 flex items-center justify-center text-[10px] text-white font-black">FB</div>
                             <div class="w-10 h-10 rounded-full border-2 border-white bg-pink-500 flex items-center justify-center text-[10px] text-white font-black">IG</div>
@@ -355,7 +355,7 @@
             <div class="reveal mt-20 rounded-[40px] border border-brand-accent/20 bg-brand-accent/[0.03] p-10 md:p-12 text-center relative overflow-hidden">
                 <h3 class="text-3xl md:text-5xl font-heading font-black mb-6 relative z-10 leading-tight uppercase italic gradient-text">Command Your <br>Social Narrative</h3>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                    <a href="<?php echo $root; ?>index.php#contact" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">Pulse Check</a>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all block text-center">Pulse Check</a>
                 </div>
             </div>
         </div>

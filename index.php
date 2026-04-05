@@ -226,24 +226,16 @@
             width: 100%;
             overflow-x: auto;
             overflow-y: hidden;
-            scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            scroll-behavior: smooth;
-            overscroll-behavior-x: contain;
-            touch-action: pan-x;
-        }
-        .projects-wrapper .project-card {
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
+            cursor: grab;
         }
         .projects-wrapper::-webkit-scrollbar {
             display: none;
         }
         .projects-wrapper .project-card {
-            scroll-snap-align: start;
-            height: 520px; /* Fixed height for all cards */
+            height: 420px; /* Fixed height for all cards */
             display: flex;
         }
         .projects-wrapper .project-card .tilt-inner {
@@ -259,7 +251,7 @@
         }
         .projects-wrapper .project-card .aspect-\[4\/3\] {
             flex-shrink: 0;
-            height: 280px; /* Consistent image block height */
+            height: 220px; /* Consistent image block height */
         }
         .projects-wrapper .project-card .p-8 {
             flex-grow: 1;
@@ -388,6 +380,11 @@
             66% { transform: translate(-5px, 5px) rotate(-1deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
         }
+        /* Auto-Scrolling Semi-Circle */
+        @keyframes orbit-spin-semicircle { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(360deg); } }
+        @keyframes spin-reverse-semicircle { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(-360deg); } }
+        @keyframes orbit-spin-large { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin-reverse-large { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
     </style>
     <style id="sahasra-brand-authority">
         :root {
@@ -456,7 +453,7 @@
     
     <!-- MODERN FLOATING HUB HERO (Sahasra Multi-Orbit Slider) -->
     <section id="home" 
-             class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#fafbfc] transition-colors duration-700 dark-theme:bg-[#000B1A]"
+             class="relative h-screen flex items-center justify-center overflow-hidden bg-[#fafbfc] transition-colors duration-700 dark-theme:bg-[#000B1A]"
              x-data="{ 
                 activeSlide: 0,
             slides: [
@@ -539,7 +536,7 @@
                  class="w-full">
                 
                 <!-- Main Heading -->
-                <h1 class="text-4xl sm:text-6xl md:text-8xl font-heading font-black text-brand-accent dark-theme:text-brand-accent mb-6 md:mb-8 leading-[1.05] tracking-tight">
+                <h1 class="text-3xl sm:text-5xl md:text-7xl font-heading font-black text-brand-accent dark-theme:text-brand-accent mb-6 md:mb-8 leading-[1.05] tracking-tight">
                     One Agency for<br/>
                     <span class="text-highlight-green">Innovation</span>
                 </h1>
@@ -572,7 +569,7 @@
                      class="w-full">
                     
                     <!-- Main Heading -->
-                    <h1 class="text-4xl sm:text-6xl md:text-8xl font-heading font-black text-brand-accent dark-theme:text-brand-accent mb-6 md:mb-8 leading-[1.05] tracking-tight">
+                    <h1 class="text-3xl sm:text-5xl md:text-7xl font-heading font-black text-brand-accent dark-theme:text-brand-accent mb-6 md:mb-8 leading-[1.05] tracking-tight">
                         <span x-text="slide.title"></span><br/>
                         <span class="text-highlight-green" x-text="slide.highlight"></span>
                     </h1>
@@ -595,7 +592,7 @@
             </template>
 
             <!-- Slide Navigation Dots -->
-            <div class="absolute -bottom-24 left-1/2 -translate-x-1/2 flex gap-4 z-40">
+            <div class="absolute -bottom-40 left-1/2 -translate-x-1/2 flex gap-4 z-40">
                 <template x-for="(slide, index) in slides" :key="index">
                     <button @click="activeSlide = index" 
                             class="w-2 h-2 rounded-full transition-all duration-500"
@@ -603,17 +600,43 @@
                 </template>
             </div>
             
-            <!-- Social Proof -->
-            <div class="mt-16 flex flex-col items-center gap-4 reveal">
-                <div class="flex items-center gap-5">
-                    <div class="flex -space-x-3">
-                        <img src="https://i.pravatar.cc/100?u=1" class="w-10 h-10 rounded-full border-2 border-white ring-2 ring-gray-50 object-cover shadow-sm" />
-                        <img src="https://i.pravatar.cc/100?u=2" class="w-10 h-10 rounded-full border-2 border-white ring-2 ring-gray-50 object-cover shadow-sm" />
-                        <img src="https://i.pravatar.cc/100?u=3" class="w-10 h-10 rounded-full border-2 border-white ring-2 ring-gray-50 object-cover shadow-sm" />
-                        <img src="https://i.pravatar.cc/100?u=4" class="w-10 h-10 rounded-full border-2 border-white ring-2 ring-gray-50 object-cover shadow-sm" />
+
+        </div>
+
+        <!-- LARGE AUTO-SCROLLING SEMI-CIRCLE ORBIT -->
+        <div class="absolute left-1/2 -translate-x-1/2 z-[25] pointer-events-none hidden sm:block
+                    bottom-[-280px] w-[450px] h-[450px] 
+                    md:bottom-[-380px] md:w-[600px] md:h-[600px] 
+                    lg:bottom-[-430px] lg:w-[700px] lg:h-[700px]
+                    xl:bottom-[-500px] xl:w-[800px] xl:h-[800px]">
+             
+            <!-- Main Rotating Circle -->
+            <div class="w-full h-full rounded-full" style="animation: orbit-spin-large 70s linear infinite;">
+                <?php
+                $base_logos = ["python/python-original.svg", "docker/docker-original.svg", "react/react-original.svg", "nodejs/nodejs-original.svg", "flutter/flutter-original.svg", "firebase/firebase-plain.svg", "figma/figma-original.svg", "javascript/javascript-original.svg", "typescript/typescript-original.svg", "php/php-original.svg", "html5/html5-original.svg", "css3/css3-original.svg"];
+                // Expand to 36 logos for super tight gap
+                $final_logos = array_merge($base_logos, $base_logos, $base_logos); 
+                $total_arc_logos = count($final_logos);
+                foreach($final_logos as $i => $logo) { 
+                     $angle = $i * (360 / $total_arc_logos);
+                ?>
+                <!-- Static ray from center -->
+                <div class="absolute inset-0" style="transform: rotate(<?= $angle ?>deg);">
+                    <!-- Point on the perimeter -->
+                    <div class="absolute top-0 left-1/2 w-[35px] h-[35px] md:w-[45px] md:h-[45px] lg:w-[50px] lg:h-[50px] -translate-x-1/2 -translate-y-1/2">
+                        <!-- Anti-rotate the static ray -->
+                        <div class="w-full h-full" style="transform: rotate(<?= -$angle ?>deg);">
+                            <!-- Anti-rotate the continuous main spin -->
+                            <div class="w-full h-full" style="animation: spin-reverse-large 70s linear infinite;">
+                                <!-- The Logo Card -->
+                                <div class="w-full h-full bg-white dark-theme:bg-slate-800 rounded-lg shadow-[0_5px_15px_rgba(0,0,0,0.08)] border border-gray-50 flex items-center justify-center p-2 pointer-events-auto hover:scale-125 transition-transform cursor-pointer hover:shadow-[0_10px_30px_rgba(37,99,235,0.3)] hover:border-brand-accent/20">
+                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/<?= $logo ?>" class="w-full h-full object-contain">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-sm text-gray-400 font-bold tracking-tight">Join 1000+ members worldwide</p>
                 </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -803,9 +826,6 @@
             </div>
         </div>
     </section>
-
-
-
 
 
 
@@ -1076,8 +1096,10 @@
         </div>
         
         <!-- Marquee Container (Auto-Scrolling Projects) -->
-        <div class="projects-marquee py-10 relative">
-            <div class="projects-wrapper flex">
+        <div class="projects-marquee py-10 relative"
+             x-data="{ total: 3, current: 0 }" 
+             @update-index.window="if($event.detail.id === 'projects-slider') current = $event.detail.index">
+            <div class="projects-wrapper flex invisible-scrollbar" id="projects-slider">
                 <!-- Project Card 1: E-Commerce -->
                 <a href="products/ecommerce-platform.php" class="project-card flex-shrink-0 w-[400px] px-4 group block">
                     <div class="tilt-inner bg-white rounded-3xl overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full">
@@ -1193,9 +1215,9 @@
                 </div>
             </div>
             <div class="projects-nav">
-                <button type="button" class="project-dot active" data-index="0" aria-label="Show project 1"></button>
-                <button type="button" class="project-dot" data-index="1" aria-label="Show project 2"></button>
-                <button type="button" class="project-dot" data-index="2" aria-label="Show project 3"></button>
+                <button type="button" class="project-dot" :class="{ 'active': current === 0 }" @click="scrollToProject(0)" aria-label="Show project 1"></button>
+                <button type="button" class="project-dot" :class="{ 'active': current === 1 }" @click="scrollToProject(1)" aria-label="Show project 2"></button>
+                <button type="button" class="project-dot" :class="{ 'active': current === 2 }" @click="scrollToProject(2)" aria-label="Show project 3"></button>
             </div>
         </div>
 
@@ -1208,58 +1230,7 @@
 
     </section>
 
-    <!-- 6.6 CLIENTS LOGO MARQUEE -->
-    <section class="py-10 bg-white overflow-hidden border-b border-gray-100">
-        <div class="container mx-auto px-6 mb-6 text-center reveal">
-            <h3 class="text-brand-dark font-black text-xl tracking-[1px] uppercase">Trusted By Industry Leaders</h3>
-        </div>
-        
-        <!-- Row 1: Scrolling Left -->
-        <div class="marquee-container mb-4">
-            <div class="marquee-track scroll-left hover:pause">
-                <img src="https://img.logo.dev/microsoft.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/google.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/amazon.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/netflix.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/spotify.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/adobe.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/slack.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/uber.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <!-- Duplicate for Loop -->
-                <img src="https://img.logo.dev/microsoft.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/google.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/amazon.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/netflix.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/spotify.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/adobe.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/slack.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/uber.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-            </div>
-        </div>
 
-        <!-- Row 2: Scrolling Right -->
-        <div class="marquee-container">
-            <div class="marquee-track scroll-right hover:pause">
-                <img src="https://img.logo.dev/meta.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/apple.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/tesla.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/digitalocean.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/github.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/figma.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/discord.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/stripe.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <!-- Duplicate for Loop -->
-                <img src="https://img.logo.dev/meta.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/apple.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/tesla.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/digitalocean.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/github.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/figma.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/discord.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-                <img src="https://img.logo.dev/stripe.com?token=pk_S8_vL-7pSle-I-l-s-q-p-w" class="client-logo" alt="Client">
-            </div>
-        </div>
-    </section>
 
     <!-- 8. TEAM SECTION -->
     <section class="py-24 bg-white">
@@ -1345,7 +1316,7 @@
             
             <!-- Reviews Scroll Container -->
             <div class="relative py-10" 
-                 x-data="{ total: 5, current: 0 }" 
+                 x-data="{ total: 3, current: 0 }" 
                  @update-index.window="if($event.detail.id === 'reviews-slider') current = $event.detail.index">
                 <div class="reviews-wrapper invisible-scrollbar" id="reviews-slider">
                     <!-- Review Card 1 -->
@@ -1626,7 +1597,7 @@
                 <span class="text-brand-accent font-semibold tracking-wider text-sm uppercase mb-2 block">Contact Now</span>
                 <h2 class="text-3xl md:text-4xl font-heading font-bold mb-8">Request A <span class="gradient-text">Call Back</span></h2>
                 
-                <form onsubmit="event.preventDefault();" class="space-y-6">
+                <form class="sahasra-dynamic-form space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <input type="text" placeholder="Your Name" class="w-full outline-none border border-gray-200 focus:border-brand-accent rounded-xl px-5 py-4 bg-gray-50 focus:bg-white transition-colors" required>
@@ -1652,91 +1623,8 @@
     </section>
 
     <!-- 12. FOOTER -->
-    <footer class="bg-brand-dark pt-24 pb-12 text-gray-400 overflow-hidden relative">
-        <!-- Decoration -->
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <?php include 'includes/footer.php'; ?>
 
-        <div class="container mx-auto px-6 md:px-12 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-                <!-- Col 1 -->
-                <div>
-                    <a href="#" class="flex items-center gap-2 mb-8">
-                        <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-accent/20">S</div>
-                        <span class="font-heading font-bold text-2xl text-white tracking-tight">Sahasra<span class="text-brand-accent">.</span></span>
-                    </a>
-                    <p class="text-[15px] leading-relaxed mb-8 text-gray-400">Transforming global businesses through high-fidelity digital solutions and premium IT architecture. We don't just build, we innovate.</p>
-                    <div class="flex gap-4">
-                        <a href="#" class="footer-social-icon"><i class="uil uil-facebook-f"></i></a>
-                        <a href="#" class="footer-social-icon"><i class="uil uil-instagram"></i></a>
-                        <a href="#" class="footer-social-icon"><i class="uil uil-twitter"></i></a>
-                        <a href="#" class="footer-social-icon"><i class="uil uil-linkedin"></i></a>
-                    </div>
-                </div>
-
-                <!-- Col 2 -->
-                <div class="lg:pl-10">
-                    <h4 class="text-white text-lg font-bold mb-8 font-heading relative inline-block">
-                        Our Services
-                        <span class="absolute -bottom-2 left-0 w-12 h-1 bg-brand-accent rounded-full"></span>
-                    </h4>
-                    <ul class="space-y-4">
-                        <li><a href="#" class="footer-link"><i class="uil uil-angle-right-b mr-2 text-brand-accent"></i> Web Development</a></li>
-                        <li><a href="#" class="footer-link"><i class="uil uil-angle-right-b mr-2 text-brand-accent"></i> UI/UX Design</a></li>
-                        <li><a href="#" class="footer-link"><i class="uil uil-angle-right-b mr-2 text-brand-accent"></i> Digital Marketing</a></li>
-                        <li><a href="#" class="footer-link"><i class="uil uil-angle-right-b mr-2 text-brand-accent"></i> Cloud Solutions</a></li>
-                        <li><a href="#" class="footer-link"><i class="uil uil-angle-right-b mr-2 text-brand-accent"></i> App Development</a></li>
-                    </ul>
-                </div>
-
-                <!-- Col 3 -->
-                <div class="lg:pl-10">
-                    <h4 class="text-white text-lg font-bold mb-8 font-heading relative inline-block">
-                        Quick Links
-                        <span class="absolute -bottom-2 left-0 w-12 h-1 bg-brand-accent rounded-full"></span>
-                    </h4>
-                    <ul class="space-y-4">
-                        <li><a href="#about" class="footer-link">About Our Agency</a></li>
-                        <li><a href="#portfolio" class="footer-link">Case Studies</a></li>
-                        <li><a href="#" class="footer-link">Latest Insights</a></li>
-                        <li><a href="#contact" class="footer-link">Contact Support</a></li>
-                        <li><a href="#" class="footer-link">Terms of Service</a></li>
-                    </ul>
-                </div>
-
-                <!-- Col 4 -->
-                <div>
-                    <h4 class="text-white text-lg font-bold mb-8 font-heading relative inline-block">
-                        Reach Us
-                        <span class="absolute -bottom-2 left-0 w-12 h-1 bg-brand-accent rounded-full"></span>
-                    </h4>
-                    <ul class="space-y-5">
-                        <li class="flex items-start gap-4 footer-contact-item">
-                            <i class="uil uil-map-marker text-brand-accent text-xl mt-1"></i>
-                            <span class="text-[15px]">123 Tech Avenue, Silicon Valley, CA 90210</span>
-                        </li>
-                        <li class="flex items-center gap-4 footer-contact-item">
-                            <i class="uil uil-envelope text-brand-accent text-xl"></i>
-                            <a href="mailto:info@sahasra.com" class="hover:text-white transition-colors text-[15px]">info@sahasra.com</a>
-                        </li>
-                        <li class="flex items-center gap-4 footer-contact-item">
-                            <i class="uil uil-phone-alt text-brand-accent text-xl"></i>
-                            <a href="tel:+918885526751" class="hover:text-white transition-colors text-[15px]">+91 88855 26751</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Bottom Strip -->
-            <div class="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500">
-                <p>&copy; 2026 Sahasra IT Solutions. Premium Digital Excellence.</p>
-                <div class="flex items-center gap-8">
-                    <a href="#" class="hover:text-brand-accent transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-brand-accent transition-colors">Cookie Policy</a>
-                    <a href="#" class="hover:text-brand-accent transition-colors">Support Center</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- JS for scroll animations -->
     <script>
@@ -2228,41 +2116,96 @@
                     });
                 });
             });
-            // --- PROJECT CAROUSEL: MOUSE WHEEL & DRAG-TO-SCROLL ---
-            const projectsWrapper = document.querySelector('.projects-wrapper');
+            // --- PROJECT CAROUSEL: HYBRID INTERACTION ---
+            const projectsWrapper = document.getElementById('projects-slider');
             if (projectsWrapper) {
+                let isProjDown = false;
+                let startXProj;
+                let scrollLeftProj;
+                let projAutoPlay;
+
+                const startProjAutoPlay = () => {
+                    clearInterval(projAutoPlay);
+                    projAutoPlay = setInterval(() => {
+                        if (!isProjDown) {
+                            let maxScroll = projectsWrapper.scrollWidth - projectsWrapper.clientWidth;
+                            if (projectsWrapper.scrollLeft >= maxScroll - 2) {
+                                projectsWrapper.scrollLeft = 0;
+                            } else {
+                                projectsWrapper.scrollLeft += 1;
+                            }
+                        }
+                    }, 25);
+                };
+
+                startProjAutoPlay();
+
+                // 1. Mouse Wheel
                 projectsWrapper.addEventListener('wheel', (e) => {
                     if (e.deltaY !== 0) {
                         e.preventDefault();
                         projectsWrapper.scrollLeft += e.deltaY;
+                        clearInterval(projAutoPlay);
+                        clearTimeout(projectsWrapper.resumeTimer);
+                        projectsWrapper.resumeTimer = setTimeout(startProjAutoPlay, 3000);
                     }
                 }, { passive: false });
 
-                let isDown = false;
-                let startX;
-                let scrollLeft;
-
+                // 2. Drag
                 projectsWrapper.addEventListener('mousedown', (e) => {
-                    isDown = true;
+                    isProjDown = true;
                     projectsWrapper.classList.add('dragging');
-                    startX = e.pageX - projectsWrapper.offsetLeft;
-                    scrollLeft = projectsWrapper.scrollLeft;
+                    startXProj = e.pageX - projectsWrapper.offsetLeft;
+                    scrollLeftProj = projectsWrapper.scrollLeft;
+                    clearInterval(projAutoPlay);
                 });
                 projectsWrapper.addEventListener('mouseleave', () => {
-                    isDown = false;
-                    projectsWrapper.classList.remove('dragging');
+                    if(isProjDown) {
+                        isProjDown = false;
+                        projectsWrapper.classList.remove('dragging');
+                        startProjAutoPlay();
+                    }
                 });
                 projectsWrapper.addEventListener('mouseup', () => {
-                    isDown = false;
+                    isProjDown = false;
                     projectsWrapper.classList.remove('dragging');
+                    startProjAutoPlay();
                 });
                 projectsWrapper.addEventListener('mousemove', (e) => {
-                    if(!isDown) return;
+                    if(!isProjDown) return;
                     e.preventDefault();
                     const x = e.pageX - projectsWrapper.offsetLeft;
-                    const walk = (x - startX) * 1.5;
-                    projectsWrapper.scrollLeft = scrollLeft - walk;
+                    const walk = (x - startXProj) * 1.5;
+                    projectsWrapper.scrollLeft = scrollLeftProj - walk;
                 });
+
+                // Dot Syncing
+                projectsWrapper.addEventListener('scroll', () => {
+                    const scrollPos = projectsWrapper.scrollLeft;
+                    const cardWidth = 400; // Match width of project cards
+                    const index = Math.round(scrollPos / cardWidth);
+                    
+                    window.dispatchEvent(new CustomEvent('update-index', { 
+                        detail: { id: 'projects-slider', index: index } 
+                    }));
+                });
+
+                // Global Scroll Helper for dots
+                window.scrollToProject = (index) => {
+                    clearInterval(projAutoPlay);
+                    const cardWidth = 400;
+                    projectsWrapper.scrollTo({
+                        left: index * cardWidth,
+                        behavior: 'smooth'
+                    });
+                    
+                    window.dispatchEvent(new CustomEvent('update-index', { 
+                        detail: { id: 'projects-slider', index: index } 
+                    }));
+
+                    clearTimeout(projectsWrapper.resumeTimer);
+                    projectsWrapper.resumeTimer = setTimeout(startProjAutoPlay, 5000);
+                };
             }
 
             // --- REVIEWS CAROUSEL: HYBRID INTERACTION ---

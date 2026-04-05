@@ -179,7 +179,7 @@
                         </div>
                     </div>
 
-                    <a href="#pricing" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg hover:shadow-brand-accent/30">
+                    <a href="<?php echo $root; ?>contact.php" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg hover:shadow-brand-accent/30">
                         <i class="uil uil-bill"></i> View All Plans
                     </a>
                 </div>
@@ -255,7 +255,7 @@
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> 10GB NVMe SSD</li>
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> Free SSL Certificate</li>
                     </ul>
-                    <button class="w-full py-4 rounded-2xl border-2 border-brand-accent/20 text-brand-accent font-black text-[10px] uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all">Order Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-4 rounded-2xl border-2 border-brand-accent/20 text-brand-accent font-black text-[10px] uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all block text-center">Order Now</a>
                 </div>
 
                 <!-- Business Plan -->
@@ -272,7 +272,7 @@
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> 50GB NVMe SSD</li>
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> Free Domain (.in)</li>
                     </ul>
-                    <button class="w-full py-4 gradient-bg text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg hover:scale-[1.02] transition-all">Order Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-4 gradient-bg text-white font-black text-[10px] uppercase tracking-widest rounded-2xl shadow-lg hover:scale-[1.02] transition-all block text-center">Order Now</a>
                 </div>
 
                 <!-- Professional Plan -->
@@ -288,7 +288,7 @@
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> 100GB NVMe SSD</li>
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> Turbo Speed Boost</li>
                     </ul>
-                    <button class="w-full py-4 rounded-2xl border-2 border-brand-accent/20 text-brand-accent font-black text-[10px] uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all">Order Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-4 rounded-2xl border-2 border-brand-accent/20 text-brand-accent font-black text-[10px] uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all block text-center">Order Now</a>
                 </div>
 
                 <!-- Elite Plan -->
@@ -304,7 +304,7 @@
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> 200GB NVMe SSD</li>
                         <li class="flex items-center gap-3 text-sm font-bold"><i class="uil uil-check-circle text-brand-accent"></i> Priority 24/7 Support</li>
                     </ul>
-                    <button class="w-full py-4 rounded-2xl border-2 border-brand-accent/20 text-brand-accent font-black text-[10px] uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all">Order Now</button>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full py-4 rounded-2xl border-2 border-brand-accent/20 text-brand-accent font-black text-[10px] uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all block text-center">Order Now</a>
                 </div>
             </div>
         </div>
@@ -489,10 +489,10 @@
                 <p class="opacity-60 max-w-2xl mx-auto mb-10 text-sm md:text-lg leading-relaxed relative z-10">Stop worrying about server downtime and focus on growth. Join thousands of businesses powered by Sahasra Infrastructure.</p>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                    <a href="<?php echo $root; ?>index.php#contact" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all">
+                    <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all block text-center">
                         Get Started Now
                     </a>
-                    <a href="tel:+919876543210" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg">
+                    <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black text-xs uppercase tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg block text-center">
                         Talk to an Expert
                     </a>
                 </div>

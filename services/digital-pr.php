@@ -133,7 +133,7 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 items-center">
-                        <a href="#outreach" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg">Our Influence</a>
+                        <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg block text-center">Our Influence</a>
                         <div class="flex items-center gap-3">
                             <span class="w-3 h-3 rounded-full bg-blue-500 animate-ping"></span>
                             <span class="text-[10px] font-black uppercase tracking-widest opacity-60">Global Reach</span>
@@ -353,7 +353,7 @@
             <div class="reveal mt-20 rounded-[40px] border border-brand-accent/20 bg-brand-accent/[0.03] p-10 md:p-12 text-center relative overflow-hidden">
                 <h3 class="text-3xl md:text-5xl font-heading font-black mb-6 relative z-10 leading-tight uppercase italic gradient-text">Amplify Your <br>Market Authority</h3>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                    <a href="<?php echo $root; ?>index.php#contact" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">Start Outreach</a>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all block text-center">Start Outreach</a>
                 </div>
             </div>
         </div>

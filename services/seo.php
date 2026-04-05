@@ -156,7 +156,7 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 items-center">
-                        <a href="#audit" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg hover:shadow-brand-accent/30">
+                        <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl border-2 border-brand-accent text-brand-accent font-black uppercase text-[10px] tracking-widest hover:bg-brand-accent hover:text-white transition-all shadow-lg hover:shadow-brand-accent/30 block text-center">
                             Claim Free Audit
                         </a>
                         <div class="flex -space-x-4">
@@ -415,7 +415,7 @@
                 <h3 class="text-3xl md:text-5xl font-heading font-black mb-6 relative z-10 leading-tight italic uppercase italic">Stop Guessing. <br><span class="gradient-text">Start Ranking.</span></h3>
                 <p class="opacity-60 max-w-2xl mx-auto mb-10 text-sm md:text-lg leading-relaxed relative z-10">Get a high-fidelity audit report covering technical performance, keyword gaps, and a 6-month organic growth roadmap.</p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                    <a href="<?php echo $root; ?>index.php#contact" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all">Claim Free SEO Audit</a>
+                    <a href="<?php echo $root; ?>contact.php" class="w-full sm:w-auto px-10 py-5 rounded-2xl gradient-bg text-white font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 active:scale-95 transition-all block text-center">Claim Free SEO Audit</a>
                 </div>
             </div>
         </div>
